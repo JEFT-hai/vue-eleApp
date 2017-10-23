@@ -108,6 +108,8 @@
             this.scroll.refresh();
           }
         });
+
+        console.log(this.scroll)
       },
       hide() {
         this.showFlag = false;

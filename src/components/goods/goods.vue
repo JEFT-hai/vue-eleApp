@@ -48,7 +48,8 @@
   import shopcart from '../../components/shopcart/shopcart.vue';
   import cartcontrol from '../../components/cartcontrol/cartcontrol.vue';
   import food from '../../components/food/food.vue';
-  const ERR_OK = 0;
+  import {GOODS} from '@/common/goods';
+  
   export default {
     props: {
       seller: Object
@@ -90,19 +91,26 @@
       }
     },
     created() {
+    //  console.log(GOODS);
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
 
-      this.$http.get('/api/goods')
-      .then((response) => {
-        response = response.body;
-        if (response.errno === ERR_OK) {
-          this.goods = response.data;
-          this.$nextTick(() => {
+      this.goods = GOODS;
+      this.$nextTick(() => {
             this._initScroll();
             this._calculateHeight();
-          });
-        }
       });
+
+      // this.$http.get('/goods/list')
+      // .then((response) => {
+      //   response = response.body;
+      //   if (response.status === '0') {
+      //     this.goods = response.result.list;
+      //     this.$nextTick(() => {
+      //       this._initScroll();
+      //       this._calculateHeight();
+      //     });
+      //   }
+      // });
     },
     methods: {
       selectMenu(event, index) {
@@ -133,6 +141,7 @@
         this.menuScroll = new BScroll(this.$refs.menuWrapper, {
           click: true
         });
+      //  console.log(this.menuScroll);
 
         this.foodScroll = new BScroll(this.$refs.foodWrapper, {
           click: true,

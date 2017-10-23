@@ -144,6 +144,7 @@
             } else {
               this.picScroll.refresh();
             }
+
           });
         }
       }

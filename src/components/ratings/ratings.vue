@@ -60,9 +60,9 @@
   import split from '../../components/split/split.vue';
   import ratingselect from '../../components/ratingselect/ratingselect.vue';
   import {formatDate} from '../../common/js/date';
+  import {RATINGS} from '@/common/rating';
   
   const ALL = 2;
-  const ERR_OK = 0;
   export default {
     props: {
       seller: {
@@ -101,17 +101,24 @@
       }
     },
     created() {
-      this.$http.get('/api/ratings').then((response) => {
-        response = response.body;
-        if (response.errno === ERR_OK) {
-          this.ratings = response.data;
-          this.$nextTick(() => {
-            this.scroll = new BScroll(this.$refs.ratings, {
-              click: true
-            });
-          });
-        }
+    this.ratings = RATINGS;
+   // console.log(RATINGS);
+    this.$nextTick(() => {
+      this.scroll = new BScroll(this.$refs.ratings, {
+        click: true
       });
+    });
+    //  this.$http.get('/ratings').then((response) => {
+       // response = response.body;
+      //  if (response.status === '0') {
+          // this.ratings = response.result.list;
+         //  this.$nextTick(() => {
+          //  this.scroll = new BScroll(this.$refs.ratings, //{
+          //    click: true
+           // });
+          // });
+       //  }
+    //  });
     },
     components: {
       star,

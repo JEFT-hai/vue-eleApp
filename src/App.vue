@@ -19,29 +19,31 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import _ from 'underscore';
-  import {urlParse} from './common/js/util.js';
+  // import _ from 'underscore';
+  // import {urlParse} from './common/js/util.js';
   import header from './components/header/header.vue';
+  import {SELLER} from '@/common/seller';
   
-  const ERR_OK = 0;
   export default{
     data() {
       return {
         seller: {
-          id: (() => {
-            let queryParam = urlParse();
-            return queryParam.id;
-          })()
+          // id: (() => {
+           //  let queryParam = urlParse();
+           //  return queryParam.id;
+         //  })()
         }
       };
     },
     created() {
-      this.$http.get('/api/seller?id=' + this.seller.id).then((response) => {
-        response = response.body;
-        if (response.errno === ERR_OK) {
-          this.seller = _.extend({}, this.seller, response.data);
-        }
-      });
+        this.seller = SELLER;
+
+     // this.$http.get('/sellers?id=1').then((response) => {
+    //    response = response.body;
+      //  if (response.status === '0') {
+      //    this.seller = _.extend({}, this.seller, response.result.list[0]);
+      //  }
+    //  });
     },
     components: {
       'v-header': header
